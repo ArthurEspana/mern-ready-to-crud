@@ -33,7 +33,7 @@ postRoutes.route("/posts/:id").get(async(request, response) => {
     // Instead of using find() we use findOne() to retrieve a single post
     // The id of the post is passed as a parameter in the URL, we have to make sura that we get the id from the request object
     // New ObjectId() is used to convert the string id into a mongoDB object id
-    let data = await db.collection("posts").findOne({_id: new ObjectId(request.params.id)}).toArray()
+    let data = await db.collection("posts").findOne({_id: new ObjectId(request.params.id)})
     // Because we are retrieving a single post, instead of data.length, we use Object.keys, this method returns an array of a given object's own enumerable property names
     if (Object.keys(data).length > 0) {
         response.json(data)
@@ -85,7 +85,7 @@ postRoutes.route("/posts").put(async(request, response) => {
 postRoutes.route("/posts/:id").delete(async(request, response) => {
     let db = database.getDb()
     // deleteOne() is a method that is used to delete a single post
-    let data = await db.collection("posts").deleteOne({_id: new ObjectId(request.params.id)}).toArray()
+    let data = await db.collection("posts").deleteOne({_id: new ObjectId(request.params.id)})
     response.json(data)
 })
 
